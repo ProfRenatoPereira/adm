@@ -1,0 +1,33 @@
+:root {
+    --primary: #2563eb; --primary-hover: #1d4ed8; --success: #16a34a; --danger: #dc2626;
+    --background: #f8fafc; --surface: #ffffff; --text: #1e293b; --border: #e2e8f0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+body { background: var(--background); color: var(--text); padding: 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+header { margin-bottom: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+h1 { color: var(--primary); }
+.grid-config { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.card { background: var(--surface); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); }
+.form-group { margin-bottom: 1rem; }
+label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; }
+input, select { width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; }
+button { background: var(--primary); color: white; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+button.btn-add { background: var(--success); width: 100%; }
+button.btn-print { background: #475569; }
+.dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.metric { background: var(--surface); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
+.metric.negative h2 { color: var(--danger); }
+.section-title { display: flex; justify-content: space-between; margin: 1.5rem 0 1rem; }
+.table-container { background: var(--surface); border-radius: 8px; border: 1px solid var(--border); overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: #f1f5f9; }
+.btn-link { color: var(--primary); font-weight: 600; cursor: pointer; text-decoration: none; }
+.btn-delete { background: none; color: var(--danger); border: 1px solid var(--danger); padding: 0.2rem 0.5rem; font-size: 0.8rem; }
+#print-area { display: none; }
+@media print {
+    body * { visibility: hidden; }
+    #print-area, #print-area * { visibility: visible; }
+    #print-area { display: block; position: absolute; left: 0; top: 0; width: 100%; }
+}
