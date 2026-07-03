@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Fiscal - TERCEIRO ADM ASSOCIADOS</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>TERCEIRO ADM ASSOCIADOS</h1>
+            <p>Gerenciador Operacional de Pessoal | Auditoria Interna de Custos</p>
+        </div>
+        <div class="actions-header">
+            <button class="btn-print" onclick="imprimirBalanco()">🖨️ Imprimir Balanço Geral</button>
+        </div>
+    </header>
+
+    <div class="grid-config">
+        <!-- Card Finanças -->
+        <div class="card">
+            <h3>Gestão de Caixa</h3>
+            <div class="form-group">
+                <label>Mês de Referência</label>
+                <select id="mes_referencia">
+                    <option value="Janeiro">Janeiro</option><option value="Fevereiro">Fevereiro</option>
+                    <option value="Março">Março</option><option value="Abril">Abril</option>
+                    <option value="Maio">Maio</option><option value="Junho">Junho</option>
+                    <option value="Julho" selected>Julho</option><option value="Agosto">Agosto</option>
+                    <option value="Setembro">Setembro</option><option value="Outubro">Outubro</option>
+                    <option value="Novembro">Novembro</option><option value="Dezembro">Dezembro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Receita Mensal (R$)</label>
+                <input type="number" id="receita_empresa" value="150000" onchange="atualizarDashboard()">
+            </div>
+            <div class="form-group">
+                <label>Limite Total de Pessoal</label>
+                <input type="number" id="limite_func" value="10" onchange="atualizarDashboard()">
+            </div>
+        </div>
+
+        <!-- Card Cadastro de Proventos -->
+        <div class="card">
+            <h3>Cadastro & Proventos</h3>
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" id="nome" placeholder="Ex: Renato Silva">
+            </div>
+            <div class="form-group">
+                <label>Data de Admissão (CLT)</label>
+                <input type="date" id="data_admissao" value="2025-01-15">
+            </div>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0;">
+                <div class="form-group">
+                    <label>Cargo</label>
+                    <select id="cargo">
+                        <option value="Diretoria">Diretoria</option><option value="Gerência">Gerência</option>
+                        <option value="Analista" selected>Analista / Técnico</option><option value="Operacional">Operacional</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Salário Base (R$)</label><input type="number" id="salario" value="3500"></div>
+            </div>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0;">
+                <div class="form-group"><label>Horas Contratuais</label><input type="number" id="horas_comp" value="220"></div>
+                <div class="form-group"><label>Insalubridade (R$)</label><input type="number" id="insalubridade" value="0"></div>
+            </div>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.3rem; margin-bottom: 0;">
+                <div class="form-group"><label>HE 25% (h)</label><input type="number" id="he_semana" value="0"></div>
+                <div class="form-group"><label>HE 50% (h)</label><input type="number" id="he_sabado" value="0"></div>
+                <div class="form-group"><label>HE 100% (h)</label><input type="number" id="he_domingo" value="0"></div>
+            </div>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0;">
+                <div class="form-group"><label>Benefícios Puros (R$)</label><input type="number" id="beneficios" value="500"></div>
+                <div class="form-group"><label>Filhos < 14 anos</label><input type="number" id="qtd_filhos" value="0" min="0"></div>
+            </div>
+            <div class="form-group">
+                <label>Observações do Holerite (Texto Livre)</label>
+                <input type="text" id="observacoes" placeholder="Ex: Pagamento bônus ou avisos.">
+            </div>
+        </div>
+
+        <!-- Card Descontos e Opções -->
+        <div class="card">
+            <h3>Retenções & Assistência</h3>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0;">
+                <div class="form-group"><label>Plano de Saúde (R$)</label><input type="number" id="plano_saude" value="0"></div>
+                <div class="form-group"><label>Plano Odonto (R$)</label><input type="number" id="plano_odonto" value="0"></div>
+            </div>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0;">
+                <div class="form-group"><label>Vale Farmácia (R$)</label><input type="number" id="vale_farmacia" value="0"></div>
+                <div class="form-group"><label>Sindicato (R$)</label><input type="number" id="sindicato" value="0"></div>
+            </div>
+            <div class="grid-config" style="grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0;">
+                <div class="form-group">
+                    <label>Adiantamento (40%)</label>
+                    <select id="adiantamento"><option value="sim">Sim</option><option value="nao" selected>Não</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Descontar VT? (6%)</label>
+                    <select id="vt_desconto"><option value="sim">Sim</option><option value="nao" selected>Não</option></select>
+                </div>
+            </div>
+            <button class="btn-add" onclick="adicionarFuncionario()">Adicionar Colaborador</button>
+        </div>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="dashboard">
+        <div class="metric"><p>Funcionários Ativos</p><h2 id="dash_total_func">0 / 10</h2></div>
+        <div class="metric"><p>Custo Bruto Total</p><h2 id="dash_custo_bruto">R$ 0,00</h2></div>
+        <div class="metric"><p>Impostos Retidos</p><h2 id="dash_total_descontos" style="color: #dc2626">R$ 0,00</h2></div>
+        <div class="metric"><p>Líquido Bancário</p><h2 id="dash_folha_liquida" style="color: #16a34a">R$ 0,00</h2></div>
+        <div class="metric" id="card_balanco"><p>Margem Disponível</p><h2 id="dash_saldo_empresa">R$ 0,00</h2></div>
+    </div>
+
+    <div class="section-title">
+        <h2>Quadro Corporativo Corrente</h2>
+        <button class="btn-print" style="background:#0284c7" onclick="window.print()">🖨️ Imprimir Listagem</button>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome / Admissão</th><th>Cargo</th><th>Salário Base</th><th>Líquido Final</th><th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabela_corpo"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="print-area"></div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
